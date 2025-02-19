@@ -23,7 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt # Install dependencies if a requirements file exists
 
-      - name: Train model on new data
+            - name: Train model on new data
         env:
-          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY}}
-        run: python -m pipelines.model_training_pipeline
+          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/taxi_project
+          python -m pipelines.model_training_pipeline
