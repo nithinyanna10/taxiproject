@@ -26,6 +26,8 @@ jobs:
           pip install -r requirements.txt # Install dependencies if a requirements file exists
 
       - name: Run new data fetch pipeline and load to hopsworks
-        env:
+        env: 
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY}}
-        run: python -m pipelines.inference_pipeline
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/taxi_project
+          python -m pipelines.inference_pipeline
